@@ -16,34 +16,48 @@ export default forwardRef<HTMLElement, DropdownProps>(
 		const ref2 = useRef<HTMLElement | null>(null);
 		const reference = ref || ref2;
 
+		const classSwitcher = () => {
+			optionalClass!.split(" ").forEach((c) => {
+				if (
+					typeof reference === "object" &&
+					reference.hasOwnProperty("current")
+				) {
+					if (reference.current) {
+						console.log(`avalidando ${c}`);
+						let res = reference.current.classList.contains(c);
+
+						if (res) {
+							console.log(`${c} existe`);
+							reference.current.classList.remove(c);
+							console.log(`${reference.current.className}`);
+						} else {
+							console.log(`adicionarei ${c}`);
+							reference.current.classList.add(c);
+							console.log(`${reference.current.className}`);
+						}
+					}
+				}
+			});
+		};
+
 		useEffect(() => {
 			if (optionalClass) {
 				if (
 					typeof reference === "object" &&
 					reference.hasOwnProperty("current")
 				) {
-					reference.current?.addEventListener("click", () => {
-						optionalClass.split(" ").forEach((c) => {
-                            if(reference.current){
-                                console.log(`avalidando ${c}`)
-                                let res = reference.current.classList.contains(c)
-                                
-                                if(res){
-                                    console.log(`${c} existe`)
-                                    reference.current.classList.remove(c)
-                                    console.log(`${reference.current.className}`)
-                                }
-                                else{
-                                    console.log(`adicionarei ${c}`)
-                                    reference.current.classList.add(c)
-                                    console.log(`${reference.current.className}`)
-                                }
-                            }
-						});
-					});
+					reference.current?.addEventListener("click", classSwitcher);
 				}
 			}
-		}, [optionalClass]);
+
+			return () => {
+				if (
+					typeof reference === "object" &&
+					reference.hasOwnProperty("current")
+				)
+					reference.current?.addEventListener("click", classSwitcher);
+			};
+		}, []);
 
 		return (
 			<>
