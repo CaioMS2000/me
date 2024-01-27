@@ -1,0 +1,10 @@
+{
+	"fullName": "Caio Marques Silva",
+	"location": {
+		"country": "Brasil",
+		"state": "GO",
+		"city": "Goiânia"
+	},
+	"emails": ["caiocpe@gmail.com"],
+	"phones": [{ "phone": "62993765723", "whatsApp": true }]
+}
