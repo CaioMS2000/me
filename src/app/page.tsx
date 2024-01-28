@@ -1,5 +1,5 @@
-import { readFile } from "@/utils";
-import { Info } from "@/models";
+import { fetchData, readFile } from "@/utils";
+import { Info, LanguagesObject, Repository } from "@/models";
 import { IoMail } from "react-icons/io5";
 import { FaPhone } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
@@ -7,6 +7,15 @@ import Dropdown from "@/components/Dropdown";
 
 export default async function Home() {
 	const info: Info = await readFile("./src/info.json");
+	const res = await fetchData<Repository[]>(
+		"https://api.github.com/users/caioms2000/repos"
+	);
+	const repos = res.map(r => ({...r, languages: new Array<string>(0)}))
+
+	repos.forEach(async (repo, index) => {
+		const languages: LanguagesObject = await fetchData(repo.languages_url);
+		repos[index].languages = Object.keys(languages)
+	});
 
 	return (
 		<>
