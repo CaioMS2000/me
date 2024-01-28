@@ -4,6 +4,7 @@ import { IoMail } from "react-icons/io5";
 import { FaPhone } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
 import Dropdown from "@/components/Dropdown";
+import RepositoryCard from "@/components/RepositoryCard";
 
 export default async function Home() {
 	const info: Info = await readFile("./src/info.json");
@@ -59,6 +60,14 @@ export default async function Home() {
 					))}
 				</Dropdown>
 			</header>
+
+			<main>
+				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-items-center">
+					{
+						repos.map(repo => <RepositoryCard repository={repo}/>)
+					}
+				</div>
+			</main>
 		</>
 	);
 }
