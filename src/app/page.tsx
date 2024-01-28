@@ -7,7 +7,6 @@ import Dropdown from "@/components/Dropdown";
 
 export default async function Home() {
 	const info: Info = await readFile("./src/info.json");
-	// console.log(info)
 
 	return (
 		<>
@@ -26,11 +25,11 @@ export default async function Home() {
 					</div>
 				</div>
 
-				<Dropdown optionalClass="text-white border-0 bg-blue-700 font-bold">
+				<Dropdown inactiveClass="text-white border-0 bg-blue-700 font-bold">
 					{info.emails.map((email) => (
 						<div
 							key={email}
-							className="inline-flex items-center gap-1"
+							className="inline-flex items-center gap-1 font-bold underline underline-offset-2"
 						>
 							<IoMail className="text-red-500" />
 							<li className="mb-3 last:mb-0">{email}</li>
@@ -39,7 +38,7 @@ export default async function Home() {
 					{info.phones.map(({ phone, whatsApp }) => (
 						<div
 							key={phone}
-							className="inline-flex items-center gap-1"
+							className="inline-flex items-center gap-1 font-bold underline underline-offset-2"
 						>
 							{whatsApp ? (
 								<IoLogoWhatsapp className="text-green-600" />

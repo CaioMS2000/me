@@ -1,75 +1,66 @@
 "use client";
 import {
-	HTMLAttributes,
-	PropsWithChildren,
-	forwardRef,
-	useEffect,
-	useRef,
+    HTMLAttributes,
+    PropsWithChildren,
+    forwardRef,
+    useEffect,
+    useRef,
 } from "react";
 
 interface DropdownProps extends PropsWithChildren, HTMLAttributes<HTMLElement> {
-	optionalClass?: string;
+    inactiveClass?: string;
 }
 
-export default forwardRef<HTMLElement, DropdownProps>(
-	({ children, optionalClass }: DropdownProps, ref) => {
-		const ref2 = useRef<HTMLElement | null>(null);
-		const reference = ref || ref2;
+const Dropdown = forwardRef<HTMLElement, DropdownProps>(
+    ({ children, inactiveClass }: DropdownProps, ref) => {
+        const internalRef = useRef<HTMLElement | null>(null);
+        const reference = ref || internalRef;
 
-		const classSwitcher = () => {
-			optionalClass!.split(" ").forEach((c) => {
-				if (
-					typeof reference === "object" &&
-					reference.hasOwnProperty("current")
-				) {
-					if (reference.current) {
-						console.log(`avalidando ${c}`);
-						let res = reference.current.classList.contains(c);
+        const isRefObject = (ref: any): ref is React.MutableRefObject<HTMLElement | null> =>
+            typeof ref === "object" && ref.hasOwnProperty("current");
 
-						if (res) {
-							console.log(`${c} existe`);
-							reference.current.classList.remove(c);
-							console.log(`${reference.current.className}`);
-						} else {
-							console.log(`adicionarei ${c}`);
-							reference.current.classList.add(c);
-							console.log(`${reference.current.className}`);
-						}
+        const classSwitcher = () => {
+			if (!isRefObject(reference))return;
+
+            inactiveClass?.split(" ").forEach((c) => {
+                if (reference.current){
+					const classList = reference.current.classList
+					let res = classList.contains(c);
+	
+					if (res) {
+						classList.remove(c);
+					} else {
+						classList.add(c);
 					}
 				}
-			});
-		};
+            });
+        };
 
-		useEffect(() => {
-			if (optionalClass) {
-				if (
-					typeof reference === "object" &&
-					reference.hasOwnProperty("current")
-				) {
-					reference.current?.addEventListener("click", classSwitcher);
-				}
-			}
+        useEffect(() => {
+			if (!isRefObject(reference))return;
 
-			return () => {
-				if (
-					typeof reference === "object" &&
-					reference.hasOwnProperty("current")
-				)
-					reference.current?.addEventListener("click", classSwitcher);
-			};
-		}, []);
+            if (inactiveClass) {
+                reference.current?.addEventListener("click", classSwitcher);
+            }
 
-		return (
-			<>
-				<details className="dropdown dropdown-end" open>
-					<summary className="m-1 btn" ref={reference}>
-						Contatos
-					</summary>
-					<ul className="p-3 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-fit font-bold underline underline-offset-2">
-						{children}
-					</ul>
-				</details>
-			</>
-		);
-	}
+            return () => {
+                reference.current?.removeEventListener("click", classSwitcher);
+            };
+        }, []);
+
+        return (
+            <>
+                <details className="dropdown dropdown-end" open>
+                    <summary className="m-1 btn" ref={reference}>
+                        Contatos
+                    </summary>
+                    <ul className="p-3 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-fit">
+                        {children}
+                    </ul>
+                </details>
+            </>
+        );
+    }
 );
+
+export default Dropdown;
