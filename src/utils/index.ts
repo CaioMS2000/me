@@ -1,6 +1,6 @@
 import { readFile as nativeReadFile } from 'fs/promises';
 
-export async function fetchData<T=any>(url: string, options?:Record<string, string>){
+export async function fetchData<T=any>(url: string, options?:RequestInit|Record<string, string>){
 	const res = await fetch(url, options)
 	const data: T = await res.json()
 
