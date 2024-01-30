@@ -16,9 +16,13 @@ import {
 
 export default async function Home() {
 	const info: Info = await readFile("./src/info.json");
-	const res = await fetchData<Repository[]>(
-		"https://api.github.com/users/caioms2000/repos",{cache: "no-cache"}
-	);
+	const res = await fetchData<Repository[]>("https://api.github.com/users/caioms2000/repos");
+	
+	const maybeHasError: Record<string, any> = res;
+	if(maybeHasError.message){
+		throw Error("DEU ERRO FI, FAZUELI")
+	}
+
 	const repos = res.map((r) => ({ ...r, languages: new Array<string>(0) }));
 
 	repos.forEach(async (repo, index) => {

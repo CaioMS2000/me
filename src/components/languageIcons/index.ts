@@ -1,0 +1,2 @@
+export { SiTypescript as TypescriptIcon, SiPython as PythonIcon, SiJavascript as JavascriptIcon, SiCplusplus as CplusplusIcon, SiC as CIcon } from "react-icons/si";
+export { BiSolidFileHtml as HTMLIcon } from "react-icons/bi";
