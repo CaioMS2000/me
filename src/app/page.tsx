@@ -1,7 +1,7 @@
 import { fetchData, readFile } from "@/utils";
 import { Info, LanguagesObject, Repository } from "@/models";
 import { IoMail } from "react-icons/io5";
-import { FaPhone } from "react-icons/fa";
+import { FaPhone, FaGithubSquare } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
 import Dropdown from "@/components/Dropdown";
 import RepositoryCard from "@/components/RepositoryCard";
@@ -16,11 +16,13 @@ import {
 
 export default async function Home() {
 	const info: Info = await readFile("./src/info.json");
-	const res = await fetchData<Repository[]>("https://api.github.com/users/caioms2000/repos");
-	
+	const res = await fetchData<Repository[]>(
+		"https://api.github.com/users/caioms2000/repos"
+	);
+
 	const maybeHasError: Record<string, any> = res;
-	if(maybeHasError.message){
-		throw Error("DEU ERRO FI, FAZUELI")
+	if (maybeHasError.message) {
+		throw Error("DEU ERRO FI, FAZUELI");
 	}
 
 	const repos = res.map((r) => ({ ...r, languages: new Array<string>(0) }));
@@ -45,6 +47,10 @@ export default async function Home() {
 							{info.location.city}, {info.location.state}
 						</p>
 					</div>
+				</div>
+
+				<div className="hidden sm:flex items-center">
+					<p className="font-bold bg-blue-900/80 p-5 rounded-lg text-2xl">Desenvolvedor Full Stack Jr.</p>
 				</div>
 
 				<Dropdown inactiveClass="text-white border-0 bg-blue-700 font-bold">
@@ -74,13 +80,17 @@ export default async function Home() {
 			</header>
 
 			<main className="mt-5">
-				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-items-center">
+				<div className="font-bold text-xl pl-3 mb-5 inline-flex items-center gap-2"><FaGithubSquare className="text-4xl"/> Repositórios no Github</div>
+				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center gap-y-6">
 					{repos
 						.filter(
-							(repo) => !repositoriesExceptions.includes(repo.name.toLowerCase())
+							(repo) =>
+								!repositoriesExceptions.includes(
+									repo.name.toLowerCase()
+								)
 						)
 						.map((repo) => (
-							<CardRoot key={repo.id}>
+							<CardRoot key={repo.id} className="lg:w-72">
 								<CardBody className="p-0 pb-3 rounded-[inherit]">
 									<CardTitle className="bg-zinc-900 rounded-[inherit] rounded-b-none pl-3 py-1">
 										{repo.name}
@@ -107,4 +117,4 @@ export default async function Home() {
 	);
 }
 
-const repositoriesExceptions = ["caioms2000"]
+const repositoriesExceptions = ["caioms2000"];
