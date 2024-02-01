@@ -79,9 +79,9 @@ export default async function Home() {
 				</Dropdown>
 			</header>
 
-			<main className="mt-5">
+			<main className="my-5">
 				<div className="font-bold text-xl pl-3 mb-5 inline-flex items-center gap-2"><FaGithubSquare className="text-4xl"/> Repositórios no Github</div>
-				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center gap-y-6">
+				<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 justify-items-center gap-y-6">
 					{repos
 						.filter(
 							(repo) =>
@@ -90,7 +90,7 @@ export default async function Home() {
 								)
 						)
 						.map((repo) => (
-							<CardRoot key={repo.id} className="lg:w-72">
+							<CardRoot key={repo.id} className="sm:w-64 lg:w-72">
 								<CardBody className="p-0 pb-3 rounded-[inherit]">
 									<CardTitle className="bg-zinc-900 rounded-[inherit] rounded-b-none pl-3 py-1">
 										{repo.name}
