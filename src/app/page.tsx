@@ -103,12 +103,36 @@ export default async function Home() {
 
 			<section className="">
 				<div className="flex flex-wrap justify-center gap-4 p-3">
-					<TypescriptIcon className="text-4xl text-blue-600" data-te-toggle="tooltip" title={`Typescript`}/>
-					<PythonIcon className="text-4xl text-red-400" data-te-toggle="tooltip" title={`Python`}/>
-					<JavascriptIcon className="text-4xl text-yellow-300" data-te-toggle="tooltip" title={`Javascript`}/>
-					<CplusplusIcon className="text-4xl text-purple-500" data-te-toggle="tooltip" title={`C++`}/>
-					<CIcon className="text-4xl text-blue-300" data-te-toggle="tooltip" title={`C`}/>
-					<HTMLIcon className="text-4xl text-orange-500" data-te-toggle="tooltip" title={`HTML`}/>
+					<TypescriptIcon
+						className="text-4xl text-blue-600"
+						data-te-toggle="tooltip"
+						title={`Typescript`}
+					/>
+					<PythonIcon
+						className="text-4xl text-red-400"
+						data-te-toggle="tooltip"
+						title={`Python`}
+					/>
+					<JavascriptIcon
+						className="text-4xl text-yellow-300"
+						data-te-toggle="tooltip"
+						title={`Javascript`}
+					/>
+					<CplusplusIcon
+						className="text-4xl text-purple-500"
+						data-te-toggle="tooltip"
+						title={`C++`}
+					/>
+					<CIcon
+						className="text-4xl text-blue-300"
+						data-te-toggle="tooltip"
+						title={`C`}
+					/>
+					<HTMLIcon
+						className="text-4xl text-orange-500"
+						data-te-toggle="tooltip"
+						title={`HTML`}
+					/>
 				</div>
 			</section>
 
@@ -131,14 +155,33 @@ export default async function Home() {
 									<CardTitle className="bg-zinc-900 rounded-[inherit] rounded-b-none pl-3 py-1">
 										{repo.name}
 									</CardTitle>
-									<CardContent className="p-5">
-										<p>{repo.description}</p>
-										<div className="flex flex-wrap gap-3">
-											{repo.languages
-												.filter((language) => !languagesExceptions.includes(language))
-												.map((language) => (
-												<p key={language} className="" data-te-toggle="tooltip" title={`${language}`}>{normalizeIcons(normalizeLanguageName(language))}</p>
-											))}
+									<CardContent className="p-5 flex flex-col flex-1">
+										<p className="flex-grow">{repo.description}</p>
+										<div className="">
+											<div className="divider" />
+											<div className="flex flex-wrap gap-3 w-fit">
+												{repo.languages
+													.filter(
+														(language) =>
+															!languagesExceptions.includes(
+																language
+															)
+													)
+													.map((language) => (
+														<p
+															key={language}
+															className=""
+															data-te-toggle="tooltip"
+															title={`${language}`}
+														>
+															{normalizeIcons(
+																normalizeLanguageName(
+																	language
+																)
+															)}
+														</p>
+													))}
+											</div>
 										</div>
 									</CardContent>
 									<CardActions className="px-5">
@@ -161,24 +204,29 @@ export default async function Home() {
 }
 
 const repositoriesExceptions = ["caioms2000"];
-const languagesExceptions = ["Jupyter Notebook", "Procfile", "Makefile", "QMake"];
+const languagesExceptions = [
+	"Jupyter Notebook",
+	"Procfile",
+	"Makefile",
+	"QMake",
+];
 const languageIcons: Record<string, JSX.Element> = {
-	TypeScript: <TypescriptIcon className="text-xl"/>,
-	Python: <PythonIcon className="text-xl"/>,
-	JavaScript: <JavascriptIcon className="text-xl"/>,
-	Cplusplus: <CplusplusIcon className="text-xl"/>,
-	C: <CIcon className="text-xl"/>,
-	HTML: <HTMLIcon className="text-xl"/>,
-	CSS: <CSSIcon className="text-xl"/>,
-	PHP: <PhpIcon className="text-xl"/>,
-	Sass: <SassIcon className="text-xl"/>,
-	Shell: <ShellIcon className="text-xl"/>,
-	Dockerfile: <DockerIcon className="text-xl"/>,
-	Java: <JavaIcon className="text-xl"/>,
-	Vue: <VueIcon className="text-xl"/>,
-}
-function normalizeIcons(name: string){
-	const iconElement = languageIcons[name]
+	TypeScript: <TypescriptIcon className="text-lg" />,
+	Python: <PythonIcon className="text-lg" />,
+	JavaScript: <JavascriptIcon className="text-lg" />,
+	Cplusplus: <CplusplusIcon className="text-xl" />,
+	C: <CIcon className="text-xl" />,
+	HTML: <HTMLIcon className="text-xl" />,
+	CSS: <CSSIcon className="text-xl" />,
+	PHP: <PhpIcon className="text-2xl" />,
+	Sass: <SassIcon className="text-xl" />,
+	Shell: <ShellIcon className="text-xl" />,
+	Dockerfile: <DockerIcon className="text-xl" />,
+	Java: <JavaIcon className="text-xl" />,
+	Vue: <VueIcon className="text-xl" />,
+};
+function normalizeIcons(name: string) {
+	const iconElement = languageIcons[name];
 
-	return iconElement || name
+	return iconElement || name;
 }
