@@ -13,3 +13,10 @@ export async function readFile(path: string, _encode?: BufferEncoding){
 
 	return data;
 }
+
+export function normalizeLanguageName(name: string){
+	const language = normalizedLanguageName[name]
+
+	return language || name
+}
+const normalizedLanguageName: Record<string, string> = {'C++':'Cplusplus'}

@@ -1,4 +1,4 @@
-import { fetchData, readFile } from "@/utils";
+import { fetchData, normalizeLanguageName, readFile } from "@/utils";
 import { Info, LanguagesObject, Repository } from "@/models";
 import { IoMail } from "react-icons/io5";
 import { FaPhone, FaGithubSquare } from "react-icons/fa";
@@ -13,6 +13,21 @@ import {
 	CardRoot,
 	CardTitle,
 } from "@/components/card";
+import {
+	TypescriptIcon,
+	PythonIcon,
+	JavascriptIcon,
+	CplusplusIcon,
+	CIcon,
+	HTMLIcon,
+	CSSIcon,
+	PhpIcon,
+	SassIcon,
+	ShellIcon,
+	DockerIcon,
+	JavaIcon,
+	VueIcon,
+} from "@/components/languageIcons";
 
 export default async function Home() {
 	const info: Info = await readFile("./src/info.json");
@@ -27,10 +42,15 @@ export default async function Home() {
 
 	const repos = res.map((r) => ({ ...r, languages: new Array<string>(0) }));
 
-	repos.forEach(async (repo, index) => {
+	// repos.forEach(async (repo, index) => {
+	// 	const languages: LanguagesObject = await fetchData(repo.languages_url);
+	// 	repos[index].languages = Object.keys(languages);
+	// });
+
+	for (const repo of repos) {
 		const languages: LanguagesObject = await fetchData(repo.languages_url);
-		repos[index].languages = Object.keys(languages);
-	});
+		repo.languages = Object.keys(languages);
+	}
 
 	return (
 		<>
@@ -50,7 +70,9 @@ export default async function Home() {
 				</div>
 
 				<div className="hidden sm:flex items-center">
-					<p className="font-bold bg-blue-900/80 p-5 rounded-lg text-2xl">Desenvolvedor Full Stack Jr.</p>
+					<p className="font-bold bg-blue-900/80 p-5 rounded-lg text-2xl">
+						Desenvolvedor Full Stack Jr.
+					</p>
 				</div>
 
 				<Dropdown inactiveClass="text-white border-0 bg-blue-700 font-bold">
@@ -79,8 +101,22 @@ export default async function Home() {
 				</Dropdown>
 			</header>
 
+			<section className="">
+				<div className="flex flex-wrap justify-center gap-4 p-3">
+					<TypescriptIcon className="text-4xl text-blue-600" data-te-toggle="tooltip" title={`Typescript`}/>
+					<PythonIcon className="text-4xl text-red-400" data-te-toggle="tooltip" title={`Python`}/>
+					<JavascriptIcon className="text-4xl text-yellow-300" data-te-toggle="tooltip" title={`Javascript`}/>
+					<CplusplusIcon className="text-4xl text-purple-500" data-te-toggle="tooltip" title={`C++`}/>
+					<CIcon className="text-4xl text-blue-300" data-te-toggle="tooltip" title={`C`}/>
+					<HTMLIcon className="text-4xl text-orange-500" data-te-toggle="tooltip" title={`HTML`}/>
+				</div>
+			</section>
+
 			<main className="my-5">
-				<div className="font-bold text-xl pl-3 mb-5 inline-flex items-center gap-2"><FaGithubSquare className="text-4xl"/> Repositórios no Github</div>
+				<div className="font-bold text-xl pl-3 mb-5 inline-flex items-center gap-2">
+					<FaGithubSquare className="text-4xl" /> Repositórios no
+					Github
+				</div>
 				<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 justify-items-center gap-y-6">
 					{repos
 						.filter(
@@ -96,7 +132,14 @@ export default async function Home() {
 										{repo.name}
 									</CardTitle>
 									<CardContent className="p-5">
-										{repo.description}
+										<p>{repo.description}</p>
+										<div className="flex flex-wrap gap-3">
+											{repo.languages
+												.filter((language) => !languagesExceptions.includes(language))
+												.map((language) => (
+												<p key={language} className="" data-te-toggle="tooltip" title={`${language}`}>{normalizeIcons(normalizeLanguageName(language))}</p>
+											))}
+										</div>
 									</CardContent>
 									<CardActions className="px-5">
 										<CardAction>
@@ -118,3 +161,24 @@ export default async function Home() {
 }
 
 const repositoriesExceptions = ["caioms2000"];
+const languagesExceptions = ["Jupyter Notebook", "Procfile", "Makefile", "QMake"];
+const languageIcons: Record<string, JSX.Element> = {
+	TypeScript: <TypescriptIcon className="text-xl"/>,
+	Python: <PythonIcon className="text-xl"/>,
+	JavaScript: <JavascriptIcon className="text-xl"/>,
+	Cplusplus: <CplusplusIcon className="text-xl"/>,
+	C: <CIcon className="text-xl"/>,
+	HTML: <HTMLIcon className="text-xl"/>,
+	CSS: <CSSIcon className="text-xl"/>,
+	PHP: <PhpIcon className="text-xl"/>,
+	Sass: <SassIcon className="text-xl"/>,
+	Shell: <ShellIcon className="text-xl"/>,
+	Dockerfile: <DockerIcon className="text-xl"/>,
+	Java: <JavaIcon className="text-xl"/>,
+	Vue: <VueIcon className="text-xl"/>,
+}
+function normalizeIcons(name: string){
+	const iconElement = languageIcons[name]
+
+	return iconElement || name
+}
