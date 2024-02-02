@@ -31,13 +31,14 @@ import {
 
 export default async function Home() {
 	const info: Info = await readFile("./src/info.json");
-	const res = await fetchData<Repository[]>(
-		"https://api.github.com/users/caioms2000/repos"
-	);
+	// const res = await fetchData<Repository[]>(
+	// 	"https://api.github.com/users/caioms2000/repos"
+	// );
+	const res: Repository[] = []
 
 	const maybeHasError: Record<string, any> = res;
 	if (maybeHasError.message) {
-		throw Error("DEU ERRO FI, FAZUELI");
+		throw Error(maybeHasError.message);
 	}
 
 	const repos = res.map((r) => ({ ...r, languages: new Array<string>(0) }));
