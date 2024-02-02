@@ -10,7 +10,6 @@ export default function Background({
 }) {
 	const [showToast, setShowToast] = useState(false);
 	const [toastText, setToastText] = useState("");
-    const imageAuthorReferenceRef = useRef<HTMLParagraphElement|null>(null)
 
 	function handleToast(newText: string = "") {
 		setToastText(newText);
@@ -19,28 +18,6 @@ export default function Background({
 
 		setTimeout(() => setShowToast(false), 2 * 1000);
 	}
-
-    function resizeHandler(){
-        if(!imageAuthorReferenceRef) return;
-        if(!imageAuthorReferenceRef.current) return;
-
-        const background = document.querySelector('#background');
-
-        if(!background)return;
-
-        const left = background.clientWidth - imageAuthorReferenceRef.current.clientWidth - 10
-
-        imageAuthorReferenceRef.current.style.left = `${left}px`;
-    }
-
-    useEffect(() => {
-        window.addEventListener('resize', resizeHandler);
-
-        if(!imageAuthorReferenceRef) return;
-        if(!imageAuthorReferenceRef.current) return;
-
-        resizeHandler()
-    }, [])
 
 	return (
 		<>
@@ -53,16 +30,17 @@ export default function Background({
 				{/* <div className="bg-[url('./../../public/img/pexels-pixabay-50711-1000.jpg')] w-full h-full bg-cover bg-[20%_0%]"> */}
 				{/* <div className="bg-[url('./../../public/img/technology-linkedin-background-lh8lf9sg6gog8ad0.jpg')] w-full h-full bg-cover bg-[0%_0%]"> */}
 				<div className="bg-black/80 w-full h-full">{children}</div>
-				<p
-					className="text-zinc-700 absolute top-[97%] text-sm left-[0%] w-fit cursor-pointer"
-					onClick={() => {
-						navigator.clipboard.writeText("");
-						handleToast("Link copiado");
-					}}
-                    ref={imageAuthorReferenceRef}
-				>
-					Photo by Josh Sorenson
-				</p>
+				<div className="absolute top-[97%] w-full flex justify-end pr-1">
+                    <p
+                        className="text-zinc-700 text-sm w-fit cursor-pointer"
+                        onClick={() => {
+                            navigator.clipboard.writeText("");
+                            handleToast("Link copiado");
+                        }}
+                    >
+                        Photo by Josh Sorenson
+                    </p>
+                </div>
 			</div>
 			{showToast && (
 				<>
