@@ -31,10 +31,10 @@ import {
 
 export default async function Home() {
 	const info: Info = await readFile("./src/info.json");
-	// const res = await fetchData<Repository[]>(
-	// 	"https://api.github.com/users/caioms2000/repos"
-	// );
-	const res: Repository[] = []
+	const res = await fetchData<Repository[]>(
+		"https://api.github.com/users/caioms2000/repos"
+	);
+	// const res: Repository[] = []
 
 	const maybeHasError: Record<string, any> = res;
 	if (maybeHasError.message) {
@@ -137,7 +137,7 @@ export default async function Home() {
 				</div>
 			</section>
 
-			<main className="mt-5 min-h-96">
+			<main className="mt-5">
 				<div className="font-bold text-xl pl-3 mb-5 inline-flex items-center gap-2">
 					<FaGithubSquare className="text-4xl" /> Repositórios no
 					Github
