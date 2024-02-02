@@ -1,7 +1,7 @@
 import { fetchData, normalizeLanguageName, readFile } from "@/utils";
 import { Info, LanguagesObject, Repository } from "@/models";
 import { IoMail } from "react-icons/io5";
-import { FaPhone, FaGithubSquare, FaReact } from "react-icons/fa";
+import { FaPhone, FaGithubSquare, FaReact, FaAngleRight } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { FaBootstrap } from "react-icons/fa6";
 import {
@@ -36,10 +36,21 @@ import {
 	JavaIcon,
 	VueIcon,
 } from "@/components/languageIcons";
-import { bebas, bungee, lilita, orbitron, oswald, overlock, permanent_marker, russo_one, tektur } from "@/fonts/tailwind-like";
+import {
+	bebas,
+	bungee,
+	lilita,
+	orbitron,
+	oswald,
+	overlock,
+	permanent_marker,
+	russo_one,
+	tektur,
+} from "@/fonts/tailwind-like";
 
 export default async function Home() {
 	const info: Info = await readFile("./src/info.json");
+	const firstWhatsAppNumber = info.phones.find(phone => phone.whatsApp)
 	const res = await fetchData<Repository[]>(
 		"https://api.github.com/users/caioms2000/repos"
 	);
@@ -71,7 +82,12 @@ export default async function Home() {
 						alt="Foto de perfil"
 						className="max-h-96 rounded-lg"
 					/>
-					<div className={"flex flex-col justify-center text-white pt-2 " + tektur}>
+					<div
+						className={
+							"flex flex-col justify-center text-white pt-2 " +
+							tektur
+						}
+					>
 						<p className="font-bold text-center">{info.fullName}</p>
 						<p className="font-bold text-center">
 							{info.location.city}, {info.location.state}
@@ -80,7 +96,12 @@ export default async function Home() {
 				</div>
 
 				<div className="hidden sm:flex items-center">
-					<p className={"font-bold bg-blue-900/90 p-5 rounded-lg text-2xl " + bungee}>
+					<p
+						className={
+							"font-bold bg-blue-900/90 p-5 rounded-lg text-2xl " +
+							bungee
+						}
+					>
 						Desenvolvedor Full Stack Jr.
 					</p>
 				</div>
@@ -182,7 +203,24 @@ export default async function Home() {
 			</section>
 
 			<main className="my-5">
-				<div className={"font-bold text-xl pl-3 mb-5 inline-flex items-center gap-2 " + russo_one}>
+				{firstWhatsAppNumber && (<section className="mb-10">
+					<div className="bg-zinc-800 w-fit rounded-r-lg p-3 border-4 border-l-0 border-blue-700 text-lg flex flex-col gap-5">
+						<p className="font-semibold">
+							Precisa de uma solução tecnológica? Um sistema para
+							auxiliar você?
+						</p>
+						<p className="inline-flex items-center font-bold">
+							Entre em contato comigo
+							<FaAngleRight className="text-blue-700 size-7" />
+						</p>
+					</div>
+				</section>)}
+				<div
+					className={
+						"font-bold text-xl pl-3 mb-5 inline-flex items-center gap-2 " +
+						russo_one
+					}
+				>
 					<FaGithubSquare className="text-4xl" /> Repositórios no
 					Github
 				</div>
@@ -197,7 +235,12 @@ export default async function Home() {
 						.map((repo) => (
 							<CardRoot key={repo.id} className="sm:w-64 lg:w-72">
 								<CardBody className="p-0 pb-3 rounded-[inherit]">
-									<CardTitle className={"bg-zinc-900 rounded-[inherit] rounded-b-none pl-3 py-1 " + orbitron}>
+									<CardTitle
+										className={
+											"bg-zinc-900 rounded-[inherit] rounded-b-none pl-3 py-1 " +
+											orbitron
+										}
+									>
 										{repo.name}
 									</CardTitle>
 									<CardContent className="p-5 flex flex-col flex-1">
@@ -233,7 +276,12 @@ export default async function Home() {
 									</CardContent>
 									<CardActions className="px-5">
 										<CardAction>
-											<button className={"btn bg-blue-700 text-white font-bold " + russo_one}>
+											<button
+												className={
+													"btn bg-blue-700 text-white font-bold " +
+													russo_one
+												}
+											>
 												Visitar
 											</button>
 										</CardAction>
