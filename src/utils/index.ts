@@ -1,17 +1,8 @@
-import { readFile as nativeReadFile } from 'fs/promises';
-
 export async function fetchData<T=any>(url: string, options?:RequestInit|Record<string, string>){
 	const res = await fetch(url, options)
 	const data: T = await res.json()
 
 	return data
-}
-
-export async function readFile(path: string, _encode?: BufferEncoding){
-	const encode = _encode || "utf-8"
-	const data = JSON.parse(await nativeReadFile(path, encode))
-
-	return data;
 }
 
 export function normalizeLanguageName(name: string){
@@ -20,3 +11,9 @@ export function normalizeLanguageName(name: string){
 	return language || name
 }
 const normalizedLanguageName: Record<string, string> = {'C++':'Cplusplus'}
+
+export function makeWhatsAppLink(phone: string){
+
+	const link = `https://api.whatsapp.com/send?phone=55${phone}`
+	return {link,}
+}

@@ -1,4 +1,4 @@
-import { fetchData, normalizeLanguageName, readFile } from "@/utils";
+import { fetchData, makeWhatsAppLink, normalizeLanguageName } from "@/utils";
 import { Info, LanguagesObject, Repository } from "@/models";
 import { IoMail } from "react-icons/io5";
 import { FaPhone, FaGithubSquare, FaReact, FaAngleRight } from "react-icons/fa";
@@ -47,10 +47,11 @@ import {
 	russo_one,
 	tektur,
 } from "@/fonts/tailwind-like";
+import { readFile } from "@/utils/server-side-only";
 
 export default async function Home() {
 	const info: Info = await readFile("./src/info.json");
-	const firstWhatsAppNumber = info.phones.find(phone => phone.whatsApp)
+	const firstWhatsAppNumber = info.phones.find((phone) => phone.whatsApp);
 	const res = await fetchData<Repository[]>(
 		"https://api.github.com/users/caioms2000/repos"
 	);
@@ -203,18 +204,28 @@ export default async function Home() {
 			</section>
 
 			<main className="my-5">
-				{firstWhatsAppNumber && (<section className="mb-10">
-					<div className="bg-zinc-800 w-fit rounded-r-lg p-3 border-4 border-l-0 border-blue-700 text-lg flex flex-col gap-5">
-						<p className="font-semibold">
-							Precisa de uma solução tecnológica? Um sistema para
-							auxiliar você?
-						</p>
-						<p className="inline-flex items-center font-bold">
-							Entre em contato comigo
-							<FaAngleRight className="text-blue-700 size-7" />
-						</p>
-					</div>
-				</section>)}
+				{firstWhatsAppNumber && (
+					<section className="mb-10">
+						<div className="bg-zinc-800 w-fit rounded-r-lg p-3 border-4 border-l-0 border-blue-700 text-lg flex flex-col gap-5">
+							<p className="font-semibold">
+								Precisa de uma solução tecnológica? Um sistema
+								para auxiliar você?
+							</p>
+							<a
+								href={
+									makeWhatsAppLink(firstWhatsAppNumber.phone)
+										.link
+								}
+								target="_blank"
+							>
+								<p className="inline-flex items-center font-bold">
+									Entre em contato comigo
+									<FaAngleRight className="text-blue-700 size-7" />
+								</p>
+							</a>
+						</div>
+					</section>
+				)}
 				<div
 					className={
 						"font-bold text-xl pl-3 mb-5 inline-flex items-center gap-2 " +

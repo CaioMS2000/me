@@ -1,5 +1,5 @@
 import { Info } from "@/models";
-import { readFile } from "@/utils";
+import { readFile } from "@/utils/server-side-only";
 import { NextResponse, NextRequest } from "next/server";
 
 export async function GET(request: NextRequest) {

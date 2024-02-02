@@ -6,6 +6,7 @@ import { FaGithubSquare } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { Info } from "@/models";
 import Toast from "./Toast";
+import { makeWhatsAppLink } from "@/utils";
 
 interface NavbarProps extends PropsWithChildren {}
 
@@ -75,8 +76,10 @@ export default function Navbar({}: NavbarProps) {
                             const phone = info.phones.find(phone => phone.whatsApp == true)
                             
                             if(!phone)return;
+
+							const {link} = makeWhatsAppLink(phone.phone)
                             
-                            window.open(`https://api.whatsapp.com/send?phone=55${phone.phone}`, "_blank")
+                            window.open(link, "_blank")
                             handleToast("Número copiado")
                         }}>
 							<IoLogoWhatsapp/> WhatsApp
