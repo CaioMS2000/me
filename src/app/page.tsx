@@ -1,8 +1,16 @@
 import { fetchData, normalizeLanguageName, readFile } from "@/utils";
 import { Info, LanguagesObject, Repository } from "@/models";
 import { IoMail } from "react-icons/io5";
-import { FaPhone, FaGithubSquare } from "react-icons/fa";
+import { FaPhone, FaGithubSquare, FaReact } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
+import { FaBootstrap } from "react-icons/fa6";
+import {
+	SiNextdotjs,
+	SiStyledcomponents,
+	SiTailwindcss,
+	SiDjango,
+	SiChakraui,
+} from "react-icons/si";
 import Dropdown from "@/components/Dropdown";
 import RepositoryCard from "@/components/RepositoryCard";
 import {
@@ -28,6 +36,7 @@ import {
 	JavaIcon,
 	VueIcon,
 } from "@/components/languageIcons";
+import { bebas, bungee, lilita, orbitron, oswald, overlock, permanent_marker, russo_one, tektur } from "@/fonts/tailwind-like";
 
 export default async function Home() {
 	const info: Info = await readFile("./src/info.json");
@@ -62,7 +71,7 @@ export default async function Home() {
 						alt="Foto de perfil"
 						className="max-h-96 rounded-lg"
 					/>
-					<div className="flex flex-col justify-center text-white pt-2">
+					<div className={"flex flex-col justify-center text-white pt-2 " + tektur}>
 						<p className="font-bold text-center">{info.fullName}</p>
 						<p className="font-bold text-center">
 							{info.location.city}, {info.location.state}
@@ -71,7 +80,7 @@ export default async function Home() {
 				</div>
 
 				<div className="hidden sm:flex items-center">
-					<p className="font-bold bg-blue-900/80 p-5 rounded-lg text-2xl">
+					<p className={"font-bold bg-blue-900/90 p-5 rounded-lg text-2xl " + bungee}>
 						Desenvolvedor Full Stack Jr.
 					</p>
 				</div>
@@ -134,11 +143,46 @@ export default async function Home() {
 						data-te-toggle="tooltip"
 						title={`HTML`}
 					/>
+					<FaReact
+						className="text-4xl text-blue-400"
+						data-te-toggle="tooltip"
+						title={`React`}
+					/>
+					<SiDjango
+						className="text-4xl text-green-800"
+						data-te-toggle="tooltip"
+						title={`Django`}
+					/>
+					<SiNextdotjs
+						className="text-4xl"
+						data-te-toggle="tooltip"
+						title={`Nextjs`}
+					/>
+					<SiStyledcomponents
+						className="text-4xl text-pink-300"
+						data-te-toggle="tooltip"
+						title={`Styledcomponents`}
+					/>
+					<SiTailwindcss
+						className="text-4xl text-cyan-400"
+						data-te-toggle="tooltip"
+						title={`Tailwindcss`}
+					/>
+					<FaBootstrap
+						className="text-4xl text-purple-600"
+						data-te-toggle="tooltip"
+						title={`Bootstrap`}
+					/>
+					<SiChakraui
+						className="text-4xl text-cyan-400"
+						data-te-toggle="tooltip"
+						title={`Chakraui`}
+					/>
 				</div>
 			</section>
 
-			<main className="mt-5">
-				<div className="font-bold text-xl pl-3 mb-5 inline-flex items-center gap-2">
+			<main className="my-5">
+				<div className={"font-bold text-xl pl-3 mb-5 inline-flex items-center gap-2 " + russo_one}>
 					<FaGithubSquare className="text-4xl" /> Repositórios no
 					Github
 				</div>
@@ -153,11 +197,13 @@ export default async function Home() {
 						.map((repo) => (
 							<CardRoot key={repo.id} className="sm:w-64 lg:w-72">
 								<CardBody className="p-0 pb-3 rounded-[inherit]">
-									<CardTitle className="bg-zinc-900 rounded-[inherit] rounded-b-none pl-3 py-1">
+									<CardTitle className={"bg-zinc-900 rounded-[inherit] rounded-b-none pl-3 py-1 " + orbitron}>
 										{repo.name}
 									</CardTitle>
 									<CardContent className="p-5 flex flex-col flex-1">
-										<p className="flex-grow">{repo.description}</p>
+										<p className="flex-grow">
+											{repo.description}
+										</p>
 										<div className="">
 											<div className="divider" />
 											<div className="flex flex-wrap gap-3 w-fit">
@@ -187,7 +233,7 @@ export default async function Home() {
 									</CardContent>
 									<CardActions className="px-5">
 										<CardAction>
-											<button className="btn bg-blue-700 text-white">
+											<button className={"btn bg-blue-700 text-white font-bold " + russo_one}>
 												Visitar
 											</button>
 										</CardAction>
@@ -212,19 +258,19 @@ const languagesExceptions = [
 	"QMake",
 ];
 const languageIcons: Record<string, JSX.Element> = {
-	TypeScript: <TypescriptIcon className="text-lg" />,
-	Python: <PythonIcon className="text-lg" />,
-	JavaScript: <JavascriptIcon className="text-lg" />,
-	Cplusplus: <CplusplusIcon className="text-xl" />,
-	C: <CIcon className="text-xl" />,
-	HTML: <HTMLIcon className="text-xl" />,
-	CSS: <CSSIcon className="text-xl" />,
-	PHP: <PhpIcon className="text-2xl" />,
-	Sass: <SassIcon className="text-xl" />,
-	Shell: <ShellIcon className="text-xl" />,
-	Dockerfile: <DockerIcon className="text-xl" />,
+	TypeScript: <TypescriptIcon className="text-lg text-blue-600" />,
+	Python: <PythonIcon className="text-lg text-red-400" />,
+	JavaScript: <JavascriptIcon className="text-lg text-yellow-300" />,
+	Cplusplus: <CplusplusIcon className="text-xl text-purple-500" />,
+	C: <CIcon className="text-xl text-blue-300" />,
+	HTML: <HTMLIcon className="text-xl text-orange-500" />,
+	CSS: <CSSIcon className="text-xl text-blue-300" />,
+	PHP: <PhpIcon className="text-2xl text-purple-800" />,
+	Sass: <SassIcon className="text-xl text-rose-600" />,
+	Shell: <ShellIcon className="text-xl text-lime-500" />,
+	Dockerfile: <DockerIcon className="text-xl text-blue-700" />,
 	Java: <JavaIcon className="text-xl" />,
-	Vue: <VueIcon className="text-xl" />,
+	Vue: <VueIcon className="text-xl text-green-800" />,
 };
 function normalizeIcons(name: string) {
 	const iconElement = languageIcons[name];
