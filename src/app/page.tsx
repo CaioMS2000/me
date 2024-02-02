@@ -102,7 +102,7 @@ export default async function Home() {
 				</Dropdown>
 			</header>
 
-			<section className="">
+			<section className="bg-zinc-900/90">
 				<div className="flex flex-wrap justify-center gap-4 p-3">
 					<TypescriptIcon
 						className="text-4xl text-blue-600"
@@ -137,7 +137,7 @@ export default async function Home() {
 				</div>
 			</section>
 
-			<main className="my-5">
+			<main className="mt-5 min-h-96">
 				<div className="font-bold text-xl pl-3 mb-5 inline-flex items-center gap-2">
 					<FaGithubSquare className="text-4xl" /> Repositórios no
 					Github
