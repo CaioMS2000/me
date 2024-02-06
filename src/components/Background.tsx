@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Toast from "./Toast";
+import Copyable from "./Copyable";
 
 export default function Background({
 	children,
@@ -28,15 +29,13 @@ export default function Background({
 				>
 					<div className="bg-black/80 w-full h-full">{children}</div>
 					<div className="absolute top-[99%] w-full flex justify-end pr-1">
-						<p
-							className="text-zinc-700 text-sm w-fit cursor-pointer"
-							onClick={() => {
-								navigator.clipboard.writeText("");
-								handleToast("Link copiado");
-							}}
-						>
-							Photo by Josh Sorenson
-						</p>
+						<Copyable data="https://www.pexels.com/photo/design-templates-on-a-flat-screen-computer-monitor-1714202/">
+							<p
+								className="text-zinc-700 text-sm w-fit cursor-pointer"
+							>
+								Photo by Josh Sorenson
+							</p>
+						</Copyable>
 					</div>
 				</div>
 			</div>

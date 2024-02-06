@@ -9,8 +9,8 @@ export default function Toast({text}: ToastProps) {
 	return (
 		<>
 			{/* <div className="fixed flex bottom-0 top-auto bg-red-300"> */}
-			<div className="toast toast-center ">
-				<div className="flex p-3 rounded-lg bg-success"><span className="font-bold">{text}</span></div>
+			<div className="toast toast-center">
+				<div className="flex p-3 rounded-lg bg-success"><span className="font-bold text-white">{text}</span></div>
 			</div>
 		</>
 	);

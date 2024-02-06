@@ -7,6 +7,7 @@ import { IoLogoWhatsapp } from "react-icons/io";
 import { Info } from "@/models";
 import Toast from "./Toast";
 import { makeWhatsAppLink } from "@/utils";
+import Copyable from "./Copyable";
 
 interface NavbarProps extends PropsWithChildren {}
 
@@ -58,15 +59,11 @@ export default function Navbar({}: NavbarProps) {
 						<span className="cursor-pointer inline-flex items-center gap-2" onClick={() => window.open("https://www.linkedin.com/in/caio-m-silva-5b42a9209", "_blank")}>
 							<FaLinkedin/> LinkedIn
 						</span>
-						<span className="cursor-pointer inline-flex items-center gap-2" onClick={() => {
-                            if(!info)return;
-
-                            const email = info.emails[0]
-                            navigator.clipboard.writeText(email)
-                            handleToast("Email copiado")
-                        }}>
-							<IoMail/> Email
-						</span>
+						<Copyable notificationText="Email copiado" data={info?.emails[0]}>
+							<span className="cursor-pointer inline-flex items-center gap-2">
+								<IoMail/> Email
+							</span>
+						</Copyable>
 						<span className="cursor-pointer inline-flex items-center gap-2" onClick={() => window.open("https://github.com/CaioMS2000", "_blank")}>
 							<FaGithubSquare/> GitHub
 						</span>

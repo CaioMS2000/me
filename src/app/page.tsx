@@ -48,6 +48,7 @@ import {
 	tektur,
 } from "@/fonts/tailwind-like";
 import { readFile } from "@/utils/server-side-only";
+import Copyable from "@/components/Copyable";
 
 export default async function Home() {
 	const info: Info = await readFile("./src/info.json");
@@ -114,7 +115,7 @@ export default async function Home() {
 							className="inline-flex items-center gap-1 font-bold underline underline-offset-2"
 						>
 							<IoMail className="text-red-500" />
-							<li className="mb-3 last:mb-0">{email}</li>
+							<li className="mb-3 last:mb-0"><Copyable data={email} notificationText="Email copiado">{email}</Copyable></li>
 						</div>
 					))}
 					{info.phones.map(({ phone, whatsApp }) => (
