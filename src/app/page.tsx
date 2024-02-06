@@ -1,6 +1,6 @@
 import { fetchData, makeWhatsAppLink, normalizeLanguageName } from "@/utils";
 import { Info, LanguagesObject, Repository } from "@/models";
-import { IoMail, IoSchool } from "react-icons/io5";
+import { IoMail, IoSchool, IoGlobeSharp } from "react-icons/io5";
 import { FaPhone, FaGithubSquare, FaReact, FaAngleRight } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { FaBootstrap, FaGitAlt } from "react-icons/fa6";
@@ -209,7 +209,7 @@ export default async function Home() {
 			</section>
 
 			<main className="my-5">
-				<section className="mb-10 bg-zinc-900/90 p-4">
+				<section className={"mb-10 bg-zinc-900/90 p-4 " + oswald}>
 					<p className="text-center font-bold text-2xl mb-5">
 						Apaixonado por tecnologia e estou sempre buscando novas
 						formas de auto-aprimoramento. Pronto para dar vida à sua
@@ -229,6 +229,7 @@ export default async function Home() {
 						</div>
 					</div>
 				</section>
+
 				{firstWhatsAppNumber && (
 					<section className="mb-10">
 						<div className="bg-zinc-800 w-fit rounded-r-lg p-3 border-4 border-l-0 border-blue-700 text-lg flex flex-col gap-5">
@@ -251,6 +252,39 @@ export default async function Home() {
 						</div>
 					</section>
 				)}
+
+				{info.productionProjects && (
+					<section className="mb-10">
+						<div
+							className={
+								"font-bold text-xl pl-3 mb-5 inline-flex items-center gap-2 " +
+								russo_one
+							}
+						>
+							<IoGlobeSharp className="text-4xl" /> Projetos em
+							produção
+						</div>
+						<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 justify-items-center gap-y-6">
+							{info.productionProjects.map((proj, index) => (
+								<a
+									href={proj.link}
+									className="flex flex-col items-center gap-3 p-2 text-left"
+									key={index}
+								>
+									<p className="font-bold text-lg">
+										{proj.name}
+									</p>
+									<img
+										src={`img/${proj.preview}`}
+										alt={`Preview${proj.name}`}
+										className="max-h-40"
+									/>
+								</a>
+							))}
+						</div>
+					</section>
+				)}
+
 				<div
 					className={
 						"font-bold text-xl pl-3 mb-5 inline-flex items-center gap-2 " +
@@ -332,7 +366,7 @@ export default async function Home() {
 
 				{info.education && (
 					<section className="mt-5 px-2">
-						<p className="inline-flex items-center gap-3">
+						<p className="inline-flex items-center gap-3 font-bold">
 							<IoSchool className="text-xl" />
 							Formação acadêmica
 						</p>

@@ -7,5 +7,6 @@
 	},
 	"emails": ["caiocpe@gmail.com"],
 	"phones": [{ "phone": "62993765723", "whatsApp": true }],
-	"education": [{"name": "Pontifícia Universidade Católica de Goiás", "course": "Engenharia da Computação", "duration": {"start": "2019/1", "end": "2024/1"}}]
+	"education": [{"name": "Pontifícia Universidade Católica de Goiás", "course": "Engenharia da Computação", "duration": {"start": "2019/1", "end": "2024/1"}}],
+	"productionProjects":[{"name": "Sun Light Engenharia do Sol", "link": "https://www.sunlighteng.com.br/", "preview": "sunlight-preview.png"}]
 }
