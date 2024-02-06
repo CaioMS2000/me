@@ -7,6 +7,7 @@ export type Info = {
 	};
 	emails: string[];
 	phones: { phone: string; whatsApp: boolean }[];
+	education: {name: string, course: string, duration: {start: string, end: string}}[]
 };
 
 export type Repository = {

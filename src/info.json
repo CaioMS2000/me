@@ -6,5 +6,6 @@
 		"city": "Goiânia"
 	},
 	"emails": ["caiocpe@gmail.com"],
-	"phones": [{ "phone": "62993765723", "whatsApp": true }]
+	"phones": [{ "phone": "62993765723", "whatsApp": true }],
+	"education": [{"name": "Pontifícia Universidade Católica de Goiás", "course": "Engenharia da Computação", "duration": {"start": "2019/1", "end": "2024/1"}}]
 }

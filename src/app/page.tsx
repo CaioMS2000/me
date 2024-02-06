@@ -1,6 +1,6 @@
 import { fetchData, makeWhatsAppLink, normalizeLanguageName } from "@/utils";
 import { Info, LanguagesObject, Repository } from "@/models";
-import { IoMail } from "react-icons/io5";
+import { IoMail, IoSchool } from "react-icons/io5";
 import { FaPhone, FaGithubSquare, FaReact, FaAngleRight } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { FaBootstrap } from "react-icons/fa6";
@@ -304,6 +304,45 @@ export default async function Home() {
 						// repos.map(repo => <RepositoryCard key={repo.id} repository={repo}/>)
 					}
 				</div>
+
+				{info.education && (
+					<section className="mt-5 px-2">
+						<p className="inline-flex items-center gap-3">
+							<IoSchool className="text-xl" />
+							Formação acadêmica
+						</p>
+						<div className="grid grid-cols-3">
+							{info.education.map((ed, index) => (
+								<div
+									className="flex border-2 items-center gap-3 p-2 rounded-lg"
+									key={index}
+								>
+									<img
+										src={`img/${educationAreaImages[index]}`}
+										alt={`Logo ${ed.name}`}
+										className="max-h-12"
+									/>
+									<div className="divider divider-horizontal divider-info m-0"></div>
+									<div className="div">
+										<p className="font-bold">{ed.name}</p>
+										<p className="font-semibold text-blue-700">
+											{ed.course}
+										</p>
+										<p className="italic inline-flex gap-3 text-zinc-400">
+											<span className="p">
+												{ed.duration.start}
+											</span>
+											-
+											<span className="p">
+												{ed.duration.end}
+											</span>
+										</p>
+									</div>
+								</div>
+							))}
+						</div>
+					</section>
+				)}
 			</main>
 		</>
 	);
@@ -316,6 +355,8 @@ const languagesExceptions = [
 	"Makefile",
 	"QMake",
 ];
+const educationAreaImages: string[] = ["puc-logo.png"];
+
 const languageIcons: Record<string, JSX.Element> = {
 	TypeScript: <TypescriptIcon className="text-lg text-blue-600" />,
 	Python: <PythonIcon className="text-lg text-red-400" />,
