@@ -3,7 +3,7 @@ import { Info, LanguagesObject, Repository } from "@/models";
 import { IoMail, IoSchool } from "react-icons/io5";
 import { FaPhone, FaGithubSquare, FaReact, FaAngleRight } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
-import { FaBootstrap } from "react-icons/fa6";
+import { FaBootstrap, FaGitAlt } from "react-icons/fa6";
 import {
 	SiNextdotjs,
 	SiStyledcomponents,
@@ -135,6 +135,11 @@ export default async function Home() {
 
 			<section className="bg-zinc-900/90">
 				<div className="flex flex-wrap justify-center gap-4 p-3">
+					<FaGitAlt
+						className="text-4xl text-red-600"
+						data-te-toggle="tooltip"
+						title={`Git`}
+					/>
 					<TypescriptIcon
 						className="text-4xl text-blue-600"
 						data-te-toggle="tooltip"
@@ -204,6 +209,26 @@ export default async function Home() {
 			</section>
 
 			<main className="my-5">
+				<section className="mb-10 bg-zinc-900/90 p-4">
+					<p className="text-center font-bold text-2xl mb-5">
+						Apaixonado por tecnologia e estou sempre buscando novas
+						formas de auto-aprimoramento. Pronto para dar vida à sua
+						ideia.
+					</p>
+					<div className="grid grid-rows-3 sm:grid-rows-1 sm:grid-cols-3 justify-items-center gap-x-3">
+						<div className="bg-zinc-950 p-3 rounded-lg font-bold text-lg text-center flex">
+							Criar sites e sistemas intuitivos e fáceis de usar.
+						</div>
+						<div className="bg-zinc-950 p-3 rounded-lg font-bold text-lg text-center flex">
+							Desenvolver soluções personalizadas para atender às
+							suas necessidades.
+						</div>
+						<div className="bg-zinc-950 p-3 rounded-lg font-bold text-lg text-center flex">
+							Garantir que seus projetos sejam seguros e
+							confiáveis.
+						</div>
+					</div>
+				</section>
 				{firstWhatsAppNumber && (
 					<section className="mb-10">
 						<div className="bg-zinc-800 w-fit rounded-r-lg p-3 border-4 border-l-0 border-blue-700 text-lg flex flex-col gap-5">
