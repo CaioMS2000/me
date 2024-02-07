@@ -1,13 +1,13 @@
 "use client";
-import { PropsWithChildren, forwardRef, useEffect, useRef } from "react";
+import { HTMLProps, PropsWithChildren, forwardRef, useEffect, useRef } from "react";
 
-interface DropdownRootProps extends PropsWithChildren {
+interface DropdownRootProps extends PropsWithChildren, HTMLProps<HTMLDetailsElement> {
 	inactiveClass?: string;
     label: string
 }
 
 const DropdownRoot = forwardRef<HTMLElement, DropdownRootProps>(
-	({ children, inactiveClass, label }: DropdownRootProps, ref) => {
+	({ children, inactiveClass, label, className }: DropdownRootProps, ref) => {
 		const internalRef = useRef<HTMLElement | null>(null);
 		const reference = ref || internalRef;
 
@@ -47,7 +47,7 @@ const DropdownRoot = forwardRef<HTMLElement, DropdownRootProps>(
 
 		return (
 			<>
-				<details className="dropdown dropdown-end" open>
+				<details className={"dropdown dropdown-end " + className} open>
 					<summary className="m-1 btn" ref={reference}>
 						{label}
 					</summary>
