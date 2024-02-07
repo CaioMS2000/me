@@ -152,7 +152,7 @@ export default async function Home() {
 						))}
 					</DropdownContent>
 				</DropdownRoot>
-				
+
 				<CollapseRoot className="grid order-3 sm:hidden w-fit">
 					<CollapseTitle>
 						<p className="p">Contatos</p>
@@ -433,10 +433,10 @@ export default async function Home() {
 							<IoSchool className="text-xl" />
 							Formação acadêmica
 						</p>
-						<div className="grid grid-cols-3">
+						<div className="grid sm:grid-cols-1 md:grid-cols-3">
 							{info.education.map((ed, index) => (
 								<div
-									className="flex border-2 items-center gap-3 p-2 rounded-lg"
+									className="flex border-2 items-center gap-3 p-2 rounded-lg w-fit"
 									key={index}
 								>
 									<img
