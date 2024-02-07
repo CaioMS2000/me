@@ -16,13 +16,9 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className="bg-zinc-950 min-h-screen max-w-screen">
-				<Background>
-					{children}
-				</Background>
-        <Footer />
+				<Background>{children}</Background>
+				<Footer />
 			</body>
 		</html>
 	);
 }
-
-
