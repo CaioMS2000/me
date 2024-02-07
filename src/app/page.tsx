@@ -49,6 +49,11 @@ import { readFile } from "@/utils/server-side-only";
 import Copyable from "@/components/Copyable";
 import Redirector from "@/components/Redirector";
 import { DropdownRoot, DropdownContent } from "@/components/Dropdown";
+import {
+	CollapseContent,
+	CollapseRoot,
+	CollapseTitle,
+} from "@/components/Collapse";
 
 export default async function Home() {
 	const info: Info = await readFile("./src/info.json");
@@ -72,7 +77,7 @@ export default async function Home() {
 
 	return (
 		<>
-			<header className="pb-10 bg-[url('./../../public/img/wallpaper.jpg')] bg-cover bg-[0%_20%] flex justify-between">
+			<header className="pb-10 bg-[url('./../../public/img/wallpaper.jpg')] bg-cover bg-[0%_20%] flex flex-col gap-3 sm:gap-0 sm:flex-row justify-center sm:justify-between">
 				<div className="bg-zinc-800 w-fit p-3 rounded-br-lg">
 					<img
 						src="img/perfil1.jpg"
@@ -92,54 +97,103 @@ export default async function Home() {
 					</div>
 				</div>
 
-				<div className="hidden sm:flex items-center">
+				<div className="flex items-center">
 					<p
 						className={
-							"font-bold bg-blue-900/90 p-5 rounded-lg text-2xl " +
+							"font-bold bg-blue-900/90 p-5 rounded-lg text-lg md:text-2xl text-center " +
 							bungee
 						}
 					>
 						Desenvolvedor Full Stack Jr.
 					</p>
 				</div>
-				
-				<DropdownRoot className="dropdown-end" inactiveClass="text-white border-0 bg-blue-700 font-bold" label="Contatos">
+
+				<DropdownRoot
+					className="dropdown-end hidden sm:inline-block order-3"
+					inactiveClass="text-white border-0 bg-blue-700 font-bold"
+					label="Contatos"
+				>
 					<DropdownContent>
-					{info.emails.map((email) => (
-						<div
-							key={email}
-							className="inline-flex items-center gap-1 font-bold underline underline-offset-2"
-						>
-							<IoMail className="text-red-500" />
-							<li className="mb-3 last:mb-0">
-								<Copyable
-									data={email}
-									notificationText="Email copiado"
-								>
-									{email}
-								</Copyable>
-							</li>
-						</div>
-					))}
-					{info.phones.map(({ phone, whatsApp }) => (
-						<div
-							key={phone}
-							className="inline-flex items-center gap-1 font-bold underline underline-offset-2"
-						>
-							{whatsApp ? (
-								<IoLogoWhatsapp className="text-green-600" />
-							) : (
-								<FaPhone />
-							)}
-							<li className="mb-3 last:mb-0">
-								<Redirector link={makeWhatsAppLink(phone).link} target="_blank">
-									{phone}
-								</Redirector>
-							</li>
-						</div>
-					))}
+						{info.emails.map((email) => (
+							<div
+								key={email}
+								className="inline-flex items-center gap-1 font-bold underline underline-offset-2"
+							>
+								<IoMail className="text-red-500" />
+								<li className="mb-3 last:mb-0">
+									<Copyable
+										data={email}
+										notificationText="Email copiado"
+									>
+										{email}
+									</Copyable>
+								</li>
+							</div>
+						))}
+						{info.phones.map(({ phone, whatsApp }) => (
+							<div
+								key={phone}
+								className="inline-flex items-center gap-1 font-bold underline underline-offset-2"
+							>
+								{whatsApp ? (
+									<IoLogoWhatsapp className="text-green-600" />
+								) : (
+									<FaPhone />
+								)}
+								<li className="mb-3 last:mb-0">
+									<Redirector
+										link={makeWhatsAppLink(phone).link}
+										target="_blank"
+									>
+										{phone}
+									</Redirector>
+								</li>
+							</div>
+						))}
 					</DropdownContent>
 				</DropdownRoot>
+				
+				<CollapseRoot className="grid order-3 sm:hidden w-fit">
+					<CollapseTitle>
+						<p className="p">Contatos</p>
+					</CollapseTitle>
+					<CollapseContent>
+						<div className="flex flex-col gap-3">
+							{info.emails.map((email) => (
+								<div
+									key={email}
+									className="inline-flex items-center gap-1 font-bold cursor-pointer"
+								>
+									<IoMail className="text-red-500" />
+									<Copyable
+										data={email}
+										notificationText="Email copiado"
+									>
+										{email}
+									</Copyable>
+								</div>
+							))}
+							{info.phones.map(({ phone, whatsApp }) => (
+								<div
+									key={phone}
+									className="inline-flex items-center gap-1 font-bold cursor-pointer"
+								>
+									{whatsApp ? (
+										<IoLogoWhatsapp className="text-green-600" />
+									) : (
+										<FaPhone />
+									)}
+									<Redirector
+										link={makeWhatsAppLink(phone).link}
+										target="_blank"
+									>
+										{phone}
+									</Redirector>
+								</div>
+							))}
+						</div>
+					</CollapseContent>
+				</CollapseRoot>
 			</header>
 
 			<section className="bg-zinc-900/90">
