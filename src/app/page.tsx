@@ -54,10 +54,10 @@ import Redirector from "@/components/Redirector";
 export default async function Home() {
 	const info: Info = await readFile("./src/info.json");
 	const firstWhatsAppNumber = info.phones.find((phone) => phone.whatsApp);
-	// const res = await fetchData<Repository[]>(
-	// 	"https://api.github.com/users/caioms2000/repos"
-	// );
-	const res: Repository[] = [];
+	const res = await fetchData<Repository[]>(
+		"https://api.github.com/users/caioms2000/repos"
+	);
+	// const res: Repository[] = [];
 
 	const maybeHasError: Record<string, any> = res;
 	if (maybeHasError.message) {
