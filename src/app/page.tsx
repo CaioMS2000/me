@@ -103,7 +103,7 @@ export default async function Home() {
 					</p>
 				</div>
 				
-				<DropdownRoot className="" inactiveClass="text-white border-0 bg-blue-700 font-bold" label="Contatos">
+				<DropdownRoot className="dropdown-end" inactiveClass="text-white border-0 bg-blue-700 font-bold" label="Contatos">
 					<DropdownContent>
 					{info.emails.map((email) => (
 						<div
