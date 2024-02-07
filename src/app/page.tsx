@@ -11,7 +11,7 @@ import {
 	SiDjango,
 	SiChakraui,
 } from "react-icons/si";
-import Dropdown from "@/components/Dropdown";
+// import Dropdown from "@/components/Dropdown";
 import RepositoryCard from "@/components/RepositoryCard";
 import {
 	CardAction,
@@ -50,6 +50,8 @@ import {
 import { readFile } from "@/utils/server-side-only";
 import Copyable from "@/components/Copyable";
 import Redirector from "@/components/Redirector";
+import { DropdownRoot } from "@/components/Dropdown";
+import { DropdownContent } from "@/components/Dropdown";
 
 export default async function Home() {
 	const info: Info = await readFile("./src/info.json");
@@ -103,8 +105,9 @@ export default async function Home() {
 						Desenvolvedor Full Stack Jr.
 					</p>
 				</div>
-
-				<Dropdown inactiveClass="text-white border-0 bg-blue-700 font-bold">
+				
+				<DropdownRoot inactiveClass="text-white border-0 bg-blue-700 font-bold" label="Contatos">
+					<DropdownContent>
 					{info.emails.map((email) => (
 						<div
 							key={email}
@@ -138,7 +141,43 @@ export default async function Home() {
 							</li>
 						</div>
 					))}
-				</Dropdown>
+					</DropdownContent>
+				</DropdownRoot>
+				{/* <Dropdown inactiveClass="text-white border-0 bg-blue-700 font-bold">
+					{info.emails.map((email) => (
+						<div
+							key={email}
+							className="inline-flex items-center gap-1 font-bold underline underline-offset-2"
+						>
+							<IoMail className="text-red-500" />
+							<li className="mb-3 last:mb-0">
+								<Copyable
+									data={email}
+									notificationText="Email copiado"
+								>
+									{email}
+								</Copyable>
+							</li>
+						</div>
+					))}
+					{info.phones.map(({ phone, whatsApp }) => (
+						<div
+							key={phone}
+							className="inline-flex items-center gap-1 font-bold underline underline-offset-2"
+						>
+							{whatsApp ? (
+								<IoLogoWhatsapp className="text-green-600" />
+							) : (
+								<FaPhone />
+							)}
+							<li className="mb-3 last:mb-0">
+								<Redirector link={makeWhatsAppLink(phone).link} target="_blank">
+									{phone}
+								</Redirector>
+							</li>
+						</div>
+					))}
+				</Dropdown> */}
 			</header>
 
 			<section className="bg-zinc-900/90">
