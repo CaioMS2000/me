@@ -8,23 +8,14 @@ import { Info } from "@/models";
 import Toast from "./Toast";
 import { makeWhatsAppLink } from "@/utils";
 import Copyable from "./Copyable";
+import Redirector from "./Redirector";
 
 interface NavbarProps extends PropsWithChildren {}
 
 export default function Navbar({}: NavbarProps) {
 	const [info, setInfo] = useState<Info | null>(null);
-    const [showToast, setShowToast] = useState(false)
-	const [toastText, setToastText] = useState("")
 
-    function handleToast(newText: string = ""){
-		setToastText(newText)
-
-        setShowToast(true)
-
-        setTimeout(() => setShowToast(false), 2 * 1000)
-    }
-	
-    async function fetchInfo() {
+	async function fetchInfo() {
 		const res = await fetch("/api/getInfo");
 		const data: Info = await res.json();
 
@@ -56,39 +47,35 @@ export default function Navbar({}: NavbarProps) {
 				</aside>
 				<nav>
 					<div className="grid grid-flow-col gap-6">
-						<span className="cursor-pointer inline-flex items-center gap-2" onClick={() => window.open("https://www.linkedin.com/in/caio-m-silva-5b42a9209", "_blank")}>
-							<FaLinkedin/> LinkedIn
-						</span>
-						<Copyable notificationText="Email copiado" data={info?.emails[0]}>
+						<Redirector link="https://www.linkedin.com/in/caio-m-silva-5b42a9209" target="_blank">
 							<span className="cursor-pointer inline-flex items-center gap-2">
-								<IoMail/> Email
+								<FaLinkedin /> LinkedIn
+							</span>
+						</Redirector>
+						<Copyable
+							notificationText="Email copiado"
+							data={info?.emails[0]}
+						>
+							<span className="cursor-pointer inline-flex items-center gap-2">
+								<IoMail /> Email
 							</span>
 						</Copyable>
-						<span className="cursor-pointer inline-flex items-center gap-2" onClick={() => window.open("https://github.com/CaioMS2000", "_blank")}>
-							<FaGithubSquare/> GitHub
-						</span>
-						<span className="cursor-pointer inline-flex items-center gap-2" onClick={() => {
-                            if(!info)return;
-                            
-                            const phone = info.phones.find(phone => phone.whatsApp == true)
-                            
-                            if(!phone)return;
-
-							const {link} = makeWhatsAppLink(phone.phone)
-                            
-                            window.open(link, "_blank")
-                            handleToast("Número copiado")
-                        }}>
-							<IoLogoWhatsapp/> WhatsApp
-						</span>
+						<Redirector link="https://github.com/CaioMS2000" target="_blank">
+							<span className="cursor-pointer inline-flex items-center gap-2">
+								<FaGithubSquare /> GitHub
+							</span>
+						</Redirector>
+						<Redirector
+							link={makeWhatsAppLink(info?.phones.find((phone) => phone.whatsApp == true)?.phone || "").link}
+							target="_blank"
+						>
+							<span className="cursor-pointer inline-flex items-center gap-2">
+								<IoLogoWhatsapp /> WhatsApp
+							</span>
+						</Redirector>
 					</div>
 				</nav>
 			</footer>
-		    {showToast && (
-				<>
-				<Toast text={toastText} />
-				</>
-			)}
 		</>
 	);
 }

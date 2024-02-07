@@ -49,14 +49,15 @@ import {
 } from "@/fonts/tailwind-like";
 import { readFile } from "@/utils/server-side-only";
 import Copyable from "@/components/Copyable";
+import Redirector from "@/components/Redirector";
 
 export default async function Home() {
 	const info: Info = await readFile("./src/info.json");
 	const firstWhatsAppNumber = info.phones.find((phone) => phone.whatsApp);
-	const res = await fetchData<Repository[]>(
-		"https://api.github.com/users/caioms2000/repos"
-	);
-	// const res: Repository[] = []
+	// const res = await fetchData<Repository[]>(
+	// 	"https://api.github.com/users/caioms2000/repos"
+	// );
+	const res: Repository[] = [];
 
 	const maybeHasError: Record<string, any> = res;
 	if (maybeHasError.message) {
@@ -64,11 +65,6 @@ export default async function Home() {
 	}
 
 	const repos = res.map((r) => ({ ...r, languages: new Array<string>(0) }));
-
-	// repos.forEach(async (repo, index) => {
-	// 	const languages: LanguagesObject = await fetchData(repo.languages_url);
-	// 	repos[index].languages = Object.keys(languages);
-	// });
 
 	for (const repo of repos) {
 		const languages: LanguagesObject = await fetchData(repo.languages_url);
@@ -115,7 +111,14 @@ export default async function Home() {
 							className="inline-flex items-center gap-1 font-bold underline underline-offset-2"
 						>
 							<IoMail className="text-red-500" />
-							<li className="mb-3 last:mb-0"><Copyable data={email} notificationText="Email copiado">{email}</Copyable></li>
+							<li className="mb-3 last:mb-0">
+								<Copyable
+									data={email}
+									notificationText="Email copiado"
+								>
+									{email}
+								</Copyable>
+							</li>
 						</div>
 					))}
 					{info.phones.map(({ phone, whatsApp }) => (
@@ -128,7 +131,11 @@ export default async function Home() {
 							) : (
 								<FaPhone />
 							)}
-							<li className="mb-3 last:mb-0">{phone}</li>
+							<li className="mb-3 last:mb-0">
+								<Redirector link={makeWhatsAppLink(phone).link} target="_blank">
+									{phone}
+								</Redirector>
+							</li>
 						</div>
 					))}
 				</Dropdown>
