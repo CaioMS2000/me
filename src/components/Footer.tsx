@@ -45,9 +45,12 @@ export default function Navbar({}: NavbarProps) {
 					</p>
 					<p>Copyright © 2024 - Direitos reservados</p>
 				</aside>
-				<nav>
-					<div className="grid grid-flow-col gap-6">
-						<Redirector link="https://www.linkedin.com/in/caio-m-silva-5b42a9209" target="_blank">
+				<nav className="">
+					<div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
+						<Redirector
+							link="https://www.linkedin.com/in/caio-m-silva-5b42a9209"
+							target="_blank"
+						>
 							<span className="cursor-pointer inline-flex items-center gap-2">
 								<FaLinkedin /> LinkedIn
 							</span>
@@ -60,13 +63,22 @@ export default function Navbar({}: NavbarProps) {
 								<IoMail /> Email
 							</span>
 						</Copyable>
-						<Redirector link="https://github.com/CaioMS2000" target="_blank">
+						<Redirector
+							link="https://github.com/CaioMS2000"
+							target="_blank"
+						>
 							<span className="cursor-pointer inline-flex items-center gap-2">
 								<FaGithubSquare /> GitHub
 							</span>
 						</Redirector>
 						<Redirector
-							link={makeWhatsAppLink(info?.phones.find((phone) => phone.whatsApp == true)?.phone || "").link}
+							link={
+								makeWhatsAppLink(
+									info?.phones.find(
+										(phone) => phone.whatsApp == true
+									)?.phone || ""
+								).link
+							}
 							target="_blank"
 						>
 							<span className="cursor-pointer inline-flex items-center gap-2">
