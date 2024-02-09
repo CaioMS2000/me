@@ -352,84 +352,96 @@ export default async function Home() {
 						</section>
 					)}
 
-					<div
-						className={
-							"font-bold text-xl pl-3 mb-5 inline-flex items-center gap-2 " +
-							russo_one
-						}
-					>
-						<FaGithubSquare className="text-4xl" /> Repositórios no
-						Github
-					</div>
-					<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 justify-items-center gap-y-6">
-						{repos
-							.filter(
-								(repo) =>
-									!repositoriesExceptions.includes(
-										repo.name.toLowerCase()
+					{Boolean(repos.length) && (
+						<>
+							<div
+								className={
+									"font-bold text-xl pl-3 mb-5 inline-flex items-center gap-2 " +
+									russo_one
+								}
+							>
+								<FaGithubSquare className="text-4xl" />{" "}
+								Repositórios no Github
+							</div>
+							<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 justify-items-center gap-y-6">
+								{repos
+									.filter(
+										(repo) =>
+											!repositoriesExceptions.includes(
+												repo.name.toLowerCase()
+											)
 									)
-							)
-							.map((repo) => (
-								<CardRoot
-									key={repo.id}
-									className="w-72 sm:w-80"
-								>
-									<CardBody className="p-0 pb-3 rounded-[inherit]">
-										<CardTitle
-											className={
-												"bg-zinc-900 rounded-[inherit] rounded-b-none pl-3 py-1 " +
-												orbitron
-											}
+									.map((repo) => (
+										<CardRoot
+											key={repo.id}
+											className="w-72 sm:w-80"
 										>
-											{repo.name}
-										</CardTitle>
-										<CardContent className="p-5 flex flex-col flex-1">
-											<p className="flex-grow">
-												{repo.description}
-											</p>
-											<div className="">
-												<div className="divider" />
-												<div className="flex flex-wrap gap-3 w-fit">
-													{repo.languages
-														.filter(
-															(language) =>
-																!languagesExceptions.includes(
-																	language
-																)
-														)
-														.map((language) => (
-															<p
-																key={language}
-																className=""
-																data-te-toggle="tooltip"
-																title={`${language}`}
-															>
-																{normalizeIcons(
-																	normalizeLanguageName(
-																		language
-																	)
-																)}
-															</p>
-														))}
-												</div>
-											</div>
-										</CardContent>
-										<CardActions className="px-5">
-											<CardAction>
-												<button
+											<CardBody className="p-0 pb-3 rounded-[inherit]">
+												<CardTitle
 													className={
-														"btn bg-blue-700 text-white font-bold " +
-														russo_one
+														"bg-zinc-900 rounded-[inherit] rounded-b-none pl-3 py-1 " +
+														orbitron
 													}
 												>
-													Visitar
-												</button>
-											</CardAction>
-										</CardActions>
-									</CardBody>
-								</CardRoot>
-							))}
-					</div>
+													{repo.name}
+												</CardTitle>
+												<CardContent className="p-5 flex flex-col flex-1">
+													<p className="flex-grow">
+														{repo.description}
+													</p>
+													<div className="">
+														<div className="divider" />
+														<div className="flex flex-wrap gap-3 w-fit">
+															{repo.languages
+																.filter(
+																	(
+																		language
+																	) =>
+																		!languagesExceptions.includes(
+																			language
+																		)
+																)
+																.map(
+																	(
+																		language
+																	) => (
+																		<p
+																			key={
+																				language
+																			}
+																			className=""
+																			data-te-toggle="tooltip"
+																			title={`${language}`}
+																		>
+																			{normalizeIcons(
+																				normalizeLanguageName(
+																					language
+																				)
+																			)}
+																		</p>
+																	)
+																)}
+														</div>
+													</div>
+												</CardContent>
+												<CardActions className="px-5">
+													<CardAction>
+														<button
+															className={
+																"btn bg-blue-700 text-white font-bold " +
+																russo_one
+															}
+														>
+															Visitar
+														</button>
+													</CardAction>
+												</CardActions>
+											</CardBody>
+										</CardRoot>
+									))}
+							</div>
+						</>
+					)}
 
 					{info.education && (
 						<section className="mt-5 px-2">

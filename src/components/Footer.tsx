@@ -46,11 +46,7 @@ export default function Navbar({}: NavbarProps) {
 					</p>
 					<p>Copyright © 2024 - Direitos reservados</p>
 				</aside>
-<<<<<<< HEAD
 				<nav>
-=======
-				<nav className="">
->>>>>>> 9e71614cf5d4fef3d3991c8bfee710c31d3f53ea
 					<div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
 						<Redirector
 							link="https://www.linkedin.com/in/caio-m-silva-5b42a9209"
