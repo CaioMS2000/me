@@ -36,8 +36,12 @@ export default function DebugProvider({ children }: DebugProviderProps) {
 	// const [debuging, setDebuging] = useState(
 	// 	isDevelopmentEnv || isTestEnv ? true : false
 	// );
+<<<<<<< HEAD
 	// const [debuging, setDebuging] = useState(true);
 	const [debuging, setDebuging] = useState(false);
+=======
+	const [debuging, setDebuging] = useState(true);
+>>>>>>> 9e71614cf5d4fef3d3991c8bfee710c31d3f53ea
 
 	useEffect(() => {
 		const handleKeyDown = (event: KeyboardEvent) => {
