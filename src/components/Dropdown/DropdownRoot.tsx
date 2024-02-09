@@ -11,11 +11,11 @@ interface DropdownRootProps
 	extends PropsWithChildren,
 		HTMLProps<HTMLDetailsElement> {
 	inactiveClass?: string;
-	label: string;
+	displayLabel: string|JSX.Element;
 }
 
 const DropdownRoot = forwardRef<HTMLElement, DropdownRootProps>(
-	({ children, inactiveClass, label, className }: DropdownRootProps, ref) => {
+	({ children, inactiveClass, displayLabel, className }: DropdownRootProps, ref) => {
 		const internalRef = useRef<HTMLElement | null>(null);
 		const reference = ref || internalRef;
 
@@ -57,7 +57,7 @@ const DropdownRoot = forwardRef<HTMLElement, DropdownRootProps>(
 			<>
 				<details className={"dropdown " + className} open>
 					<summary className="m-1 btn" ref={reference}>
-						{label}
+						{displayLabel}
 					</summary>
 					{children}
 				</details>
