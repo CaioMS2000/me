@@ -278,15 +278,15 @@ export default async function Home() {
 						formas de auto-aprimoramento. Pronto para dar vida à sua
 						ideia.
 					</p>
-					<div className="grid grid-rows-3 sm:grid-rows-1 sm:grid-cols-3 justify-items-center gap-x-3">
-						<div className="bg-zinc-950 p-3 rounded-lg font-bold text-lg text-center flex">
+					<div className="grid grid-rows-3 sm:grid-rows-1 gap-y-3 sm:grid-cols-3 justify-items-center sm:gap-x-3">
+						<div className="bg-base-100 p-3 rounded-lg font-bold text-lg text-center flex w-96 sm:w-[unset]">
 							Criar sites e sistemas intuitivos e fáceis de usar.
 						</div>
-						<div className="bg-zinc-950 p-3 rounded-lg font-bold text-lg text-center flex">
+						<div className="bg-base-100 p-3 rounded-lg font-bold text-lg text-center flex w-96 sm:w-[unset]">
 							Desenvolver soluções personalizadas para atender às
 							suas necessidades.
 						</div>
-						<div className="bg-zinc-950 p-3 rounded-lg font-bold text-lg text-center flex">
+						<div className="bg-base-100 p-3 rounded-lg font-bold text-lg text-center flex w-96 sm:w-[unset]">
 							Garantir que seus projetos sejam seguros e
 							confiáveis.
 						</div>
