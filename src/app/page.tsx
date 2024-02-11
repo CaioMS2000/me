@@ -1,9 +1,17 @@
 import { fetchData, makeWhatsAppLink, normalizeLanguageName } from "@/utils";
 import { Info, LanguagesObject, Repository } from "@/models";
-import { IoMail, IoSchool, IoGlobeSharp } from "react-icons/io5";
-import { FaPhone, FaGithubSquare, FaReact, FaAngleRight } from "react-icons/fa";
+import {
+	IoMail,
+	IoSchool,
+	IoGlobeSharp,
+	IoShieldCheckmarkSharp,
+} from "react-icons/io5";
+import { FaPhone, FaGithubSquare, FaReact } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { FaBootstrap, FaGitAlt } from "react-icons/fa6";
+import { RiPencilRuler2Fill } from "react-icons/ri";
+import { HiOutlineDesktopComputer } from "react-icons/hi";
+import { PiCaretDownFill } from "react-icons/pi";
 import {
 	SiNextdotjs,
 	SiStyledcomponents,
@@ -282,17 +290,27 @@ export default async function Home() {
 							vida à sua ideia.
 						</p>
 						<div className="grid grid-rows-3 sm:grid-rows-1 gap-y-3 sm:grid-cols-3 justify-items-center sm:gap-x-3">
-							<div className="bg-base-100 p-3 rounded-lg font-bold text-lg text-center flex w-60 sm:w-[unset]">
-								Criar sites e sistemas intuitivos e fáceis de
-								usar.
+							<div className="bg-base-100 p-3 rounded-lg font-bold text-lg text-center flex flex-col items-center gap-4 w-60 sm:w-[unset]">
+								<HiOutlineDesktopComputer className="size-10" />
+
+								<p className="p">
+									Criar sites e sistemas intuitivos e fáceis
+									de usar.
+								</p>
 							</div>
-							<div className="bg-base-100 p-3 rounded-lg font-bold text-lg text-center flex w-60 sm:w-[unset]">
-								Desenvolver soluções personalizadas para atender
-								às suas necessidades.
+							<div className="bg-base-100 p-3 rounded-lg font-bold text-lg text-center flex flex-col items-center gap-4 w-60 sm:w-[unset]">
+								<RiPencilRuler2Fill className="size-10" />
+								<p className="p">
+									Desenvolver soluções personalizadas para
+									atender às suas necessidades.
+								</p>
 							</div>
-							<div className="bg-base-100 p-3 rounded-lg font-bold text-lg text-center flex w-60 sm:w-[unset]">
-								Garantir que seus projetos sejam seguros e
-								confiáveis.
+							<div className="bg-base-100 p-3 rounded-lg font-bold text-lg text-center flex flex-col items-center gap-4 w-60 sm:w-[unset]">
+								<IoShieldCheckmarkSharp className="size-10" />
+								<p className="p">
+									Garantir que seus projetos sejam seguros e
+									confiáveis.
+								</p>
 							</div>
 						</div>
 					</section>
@@ -329,7 +347,7 @@ export default async function Home() {
 								}
 							>
 								<IoGlobeSharp className="text-4xl" /> Projetos
-								em produção
+								já executados
 							</div>
 							<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 justify-items-center gap-y-6">
 								{info.productionProjects.map((proj, index) => (
@@ -351,6 +369,17 @@ export default async function Home() {
 							</div>
 						</section>
 					)}
+
+					<div className="flex bg-zinc-800 py-3 justify-center mb-5 items-center gap-3 px-4">
+						<PiCaretDownFill className="size-10 hidden sm:block"/>
+						<p
+							className={
+								"font-bold text-center text-lg sm:text-3xl " + russo_one}
+						>
+							Sobre minhas capacidades técnicas
+						</p>
+						<PiCaretDownFill className="size-10 hidden sm:block"/>
+					</div>
 
 					{Boolean(repos.length) && (
 						<>

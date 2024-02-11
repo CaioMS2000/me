@@ -11,7 +11,7 @@ export default function Background({
 		<>
 			<div
 				id="background"
-				className="bg-[url('./../../public/img/wallpaper1.jpg')] bg-cover bg-[60%_0%]flex flex-col"
+				className="bg-[url('./../../public/img/wallpaper1.jpg')] bg-cover bg-[60%_0%] flex flex-col"
 			>
 				<div className="bg-black/80 w-full h-full flex justify-center">
 					{children}
