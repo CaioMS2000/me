@@ -83,6 +83,8 @@ export default async function Home() {
 		repo.languages = Object.keys(languages);
 	}
 
+	console.log(repos[0])
+
 	return (
 		<>
 			<div id="main-page" className="max-w-screen-2xl w-full h-full">
@@ -371,14 +373,16 @@ export default async function Home() {
 					)}
 
 					<div className="flex bg-zinc-800 py-3 justify-center mb-5 items-center gap-3 px-4">
-						<PiCaretDownFill className="size-10 hidden sm:block"/>
+						<PiCaretDownFill className="size-10 hidden sm:block" />
 						<p
 							className={
-								"font-bold text-center text-lg sm:text-3xl " + russo_one}
+								"font-bold text-center text-lg sm:text-3xl " +
+								russo_one
+							}
 						>
 							Sobre minhas capacidades técnicas
 						</p>
-						<PiCaretDownFill className="size-10 hidden sm:block"/>
+						<PiCaretDownFill className="size-10 hidden sm:block" />
 					</div>
 
 					{Boolean(repos.length) && (
@@ -455,14 +459,16 @@ export default async function Home() {
 												</CardContent>
 												<CardActions className="px-5">
 													<CardAction>
-														<button
-															className={
-																"btn bg-blue-700 text-white font-bold " +
-																russo_one
-															}
-														>
-															Visitar
-														</button>
+														<Redirector link={repo.html_url} target="_blank">
+															<button
+																className={
+																	"btn bg-blue-700 text-white font-bold " +
+																	russo_one
+																}
+															>
+																Visitar
+															</button>
+														</Redirector>
 													</CardAction>
 												</CardActions>
 											</CardBody>
