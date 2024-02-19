@@ -83,8 +83,6 @@ export default async function Home() {
 		repo.languages = Object.keys(languages);
 	}
 
-	console.log(repos[0])
-
 	return (
 		<>
 			<div id="main-page" className="max-w-screen-2xl w-full h-full">
